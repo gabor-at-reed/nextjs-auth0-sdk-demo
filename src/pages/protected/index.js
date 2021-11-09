@@ -1,9 +1,10 @@
 import {useUser} from '@auth0/nextjs-auth0';
 import {auth0} from '../../utils/auth0';
-
+import config from '../../config';
 import styles from '../../styles/Home.module.css'
 
 const Protected = props => {
+  const {_config} = props;
   const {user} = useUser();
 
   return (
@@ -12,6 +13,7 @@ const Protected = props => {
         <p>Reed.co.uk - Auth0 @auth0/nextjs-auth0 SDK demo app</p>
         <p>Protected page with SSR withPageAuthRequired()</p>
         <p>User: {user?.name}</p>
+        <a href={_config.auth0.serverSideSDK.logoutUrl}>Logout</a>
       </main>
     </div>
   )
@@ -30,7 +32,7 @@ export const getServerSideProps = async context => {
 
           return {
               props: {
-                  //
+                  _config: config
               }
           };
       }
