@@ -6,6 +6,10 @@ import config from '../config';
 export const setEnvsFromSecretStore = async () => {
     const emulation = await Promise.resolve('got secrets').then(function(secrets) {
         // emulating the AWS secret manager call...
+
+        process.env.AUTH0_CLIENT_ID = process.env.PRE_AUTH0_CLIENT_ID;
+        process.env.AUTH0_CLIENT_SECRET = process.env.PRE_AUTH0_CLIENT_SECRET;
+        process.env.AUTH0_SECRET = process.env.PRE_AUTH0_SECRET;
     });
 };
 
